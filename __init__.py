@@ -30,6 +30,17 @@ class NodeImporterAddonPreferences(bpy.types.AddonPreferences):
         layout.prop(self, 'folder')
 
 
+class NOD_PT_NodeGroupImporterPanel(bpy.types.Panel):
+    bl_label = "Node group importer"
+    bl_space_type = 'NODE_EDITOR'
+    bl_region_type = 'UI'
+    bl_category = 'Misc'
+
+    def draw(self, context):
+        layout = self.layout
+        layout.operator("wm.update_linked_node_groups")
+
+
 class NOD_OT_update_groups(bpy.types.Operator):
     """ Updates node groups linked using the importer addon """
     bl_label = "Update Node Groups"
@@ -75,7 +86,8 @@ def import_groups_from_library(path, relative=True, override=False):
 
 classes = {
     NOD_OT_update_groups,
-    NodeImporterAddonPreferences
+    NodeImporterAddonPreferences,
+    NOD_PT_NodeGroupImporterPanel
 }
 
 
